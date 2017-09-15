@@ -53,7 +53,7 @@ public class GameFrame {
                         shotsController.addFirstPlayerShots(x, y);
                         if (shipsController.checkHitSecondPlayer(x, y)) {
                             if (shipsController.isShipAliveSecondPlayer(x, y) == NOT_ALIVE){
-                               
+                                shotsController.killShipSecondPlayer(x, y);
                             }
                             if (!shipsController.checkSurvivorsSecondPlayer()) {
                                 JOptionPane.showMessageDialog(headFrame, "YOU WON");

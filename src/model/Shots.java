@@ -27,4 +27,12 @@ public class Shots {
         for (Shot shot : shots)
             shot.paint(g, CELL_SIZE);
     }
+
+    public void kill(int x, int y) {
+        for (int dx = -1; dx < 2; dx++)
+            for (int dy = -1; dy < 2; dy++)
+                if (!(dx == 0 && dy == 0) || !hitSamePlace(x, y))
+                    shots.add(new Shot(x+dx, y+dy));
+
+    }
 }

@@ -41,4 +41,8 @@ public class ShotsController {
     public void addSecondPlayerShots(int x, int y) {
         secondPlayerShots.add(x, y);
     }
+
+    public void killShipSecondPlayer(int x, int y) {
+        firstPlayerShots.kill(x, y);
+    }
 }
