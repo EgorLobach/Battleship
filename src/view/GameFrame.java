@@ -54,13 +54,10 @@ public class GameFrame {
                         shotsController.addFirstPlayerShots(x, y);
                         if (shipsController.checkHitSecondPlayer(x, y)) {
                             if (shipsController.isShipAliveSecondPlayer(x, y) == NOT_ALIVE) {
-                                if (shipsController.getPositionShipSecondPlayer(x, y) == VERTICALLY) {
+                                for (int dx = -3; dx < 4; dx++)
                                     for (int dy = -3; dy < 4; dy++)
-                                        if (shipsController.isBelongingShipSecondPlayer(x, y, x, y+dy))
-                                            shotsController.killShipSecondPlayer(x, y+dy);
-                                } else for (int dx = -3; dx < 4; dx++)
-                                    if (shipsController.isBelongingShipSecondPlayer(x, y, x+dx, y))
-                                        shotsController.killShipSecondPlayer(x+dx, y);
+                                        if (shipsController.isBelongingShipSecondPlayer(x, y, x+dx, y+dy))
+                                            shotsController.killShipSecondPlayer(x+dx, y+dy);
                             }
                             if (!shipsController.checkSurvivorsSecondPlayer()) {
                                 JOptionPane.showMessageDialog(headFrame, "YOU WON");

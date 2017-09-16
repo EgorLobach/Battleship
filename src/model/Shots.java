@@ -33,6 +33,5 @@ public class Shots {
             for (int dy = -1; dy < 2; dy++)
                 if (!(dx == 0 && dy == 0) || !hitSamePlace(x, y))
                     shots.add(new Shot(x+dx, y+dy));
-
     }
 }

@@ -49,10 +49,6 @@ public class ShipsController {
         return secondPlayerShips.isShipAlive(x, y);
     }
 
-    public int getPositionShipSecondPlayer(int x, int y) {
-        return secondPlayerShips.getPosition(x ,y);
-    }
-
     public boolean isBelongingShipSecondPlayer(int x1, int y1, int x2, int y2) {
         return secondPlayerShips.isBelongingShip(x1, y1, x2, y2);
     }
