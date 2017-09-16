@@ -60,11 +60,24 @@ public class Ships {
 
     public int isShipAlive(int x, int y) {
         for (Ship ship : ships)
-            for (Cell cell : ship.getCells())
-                if (cell.getX() == x && cell.getY() == y)
+            if (ship.isBelonging(x, y))
                     if (ship.isAlive())
                         return ALIVE;
                     else return NOT_ALIVE;
         return MISSED;
+    }
+
+    public int getPosition(int x, int y) {
+        for (Ship ship : ships)
+            if (ship.isBelonging(x, y))
+                    return ship.getPosition();
+        return -1;
+    }
+
+    public boolean isBelongingShip(int x1, int y1, int x2, int y2) {
+        for (Ship ship : ships)
+            if (ship.isBelonging(x1, y1)&&ship.isBelonging(x2, y2))
+                return true;
+        return false;
     }
 }

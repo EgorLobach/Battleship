@@ -6,12 +6,15 @@ import java.util.ArrayList;
 /**
  * Created by anonymous on 13.09.2017.
  */
-class Ship {
+public class Ship {
     private ArrayList<Cell> cells = new ArrayList<>();
+    private int position;
+    public static final int VERTICALLY = 1;
 
     Ship(int x, int y, int length, int position) {
+        this.position = position;
         for (int i = 0; i < length; i++) {
-            cells.add(new Cell(x + i * ((position == 1) ? 0 : 1), y + i * ((position == 1) ? 1 : 0)));
+            cells.add(new Cell(x + i * ((this.position == VERTICALLY) ? 0 : 1), y + i * ((this.position == VERTICALLY) ? 1 : 0)));
         }
     }
 
@@ -57,8 +60,13 @@ class Ship {
             cell.paint(g, cellSize, hide);
     }
 
-    ArrayList<Cell> getCells() {
-        return cells;
+    public int getPosition() {
+        return position;
     }
-
+    public boolean isBelonging(int x , int y){
+        for (Cell cell : cells)
+            if (cell.getX() == x && cell.getY() == y)
+                return true;
+        return false;
+    }
 }

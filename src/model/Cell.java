@@ -36,7 +36,6 @@ class Cell {
         return color != RED;
     }
 
-
     void paint(Graphics g, int cellSize, boolean hide) {
         if (!hide || this.color == RED) {
             g.setColor(color);
