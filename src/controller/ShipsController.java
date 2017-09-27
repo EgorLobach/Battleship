@@ -15,10 +15,9 @@ public class ShipsController {
         this.secondPlayerShips = secondPlayerShips;
     }
 
-    public void newGame(int fieldSize, int cellSizeFirstPlayer, int cellSizeSecondPlayer,
-                        boolean hideFirstPlayer, boolean hideSecondPlayer) {
-        this.firstPlayerShips = new Ships(fieldSize, cellSizeFirstPlayer, hideFirstPlayer);
-        this.secondPlayerShips = new Ships(fieldSize, cellSizeSecondPlayer, hideSecondPlayer);
+    public void newGame(int fieldSize, int cellSizeFirstPlayer, int cellSizeSecondPlayer) {
+        this.firstPlayerShips = new Ships(fieldSize, cellSizeFirstPlayer, false);
+        this.secondPlayerShips = new Ships(fieldSize, cellSizeSecondPlayer, true);
     }
 
     public void firstPlayerShipsPaint(Graphics g) {
@@ -43,6 +42,14 @@ public class ShipsController {
 
     public boolean checkSurvivorsSecondPlayer() {
         return secondPlayerShips.checkSurvivors();
+    }
+
+    public int isShipAliveFirstPlayer(int x, int y) {
+        return firstPlayerShips.isShipAlive(x, y);
+    }
+
+    public boolean isBelongingShipFirstPlayer(int x1, int y1, int x2, int y2) {
+        return firstPlayerShips.isBelongingShip(x1, y1, x2, y2);
     }
 
     public int isShipAliveSecondPlayer(int x, int y) {

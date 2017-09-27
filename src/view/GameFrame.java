@@ -9,7 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-import static model.Ship.VERTICALLY;
 import static model.Ships.NOT_ALIVE;
 
 /**
@@ -82,20 +81,10 @@ public class GameFrame {
             playerBattleField.repaint();
         });
 
-        JButton exitButton = new JButton("Exit"); // exit game button
-        exitButton.addActionListener(e -> System.exit(0));
-        JButton instructionButton = new JButton("Instruction");
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout());
-        buttonPanel.add(newGameButton);
-        buttonPanel.add(exitButton);
-
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BorderLayout());
         rightPanel.add(playerBattleField, BorderLayout.NORTH);
-        rightPanel.add(buttonPanel, BorderLayout.CENTER);
-        rightPanel.add(instructionButton, BorderLayout.SOUTH);
+        rightPanel.add(newGameButton, BorderLayout.CENTER);
 
         headFrame.setLayout(new BoxLayout(headFrame.getContentPane(), BoxLayout.X_AXIS));
         headFrame.add(compBattleField);
@@ -108,7 +97,7 @@ public class GameFrame {
 
     private void newGame() {
         shotsController.newGame(PLAYER_CELL_SIZE, COMP_CELL_SIZE);
-        shipsController.newGame(FIELD_SIZE, PLAYER_CELL_SIZE, COMP_CELL_SIZE, false, true);
+        shipsController.newGame(FIELD_SIZE, PLAYER_CELL_SIZE, COMP_CELL_SIZE);
         gameOver = false;
         randomGenerator = new Random();
     }
@@ -120,11 +109,18 @@ public class GameFrame {
             y = randomGenerator.nextInt(FIELD_SIZE);
         } while (shotsController.secondPlayerHitSamePlace(x, y));
         shotsController.addSecondPlayerShots(x, y);
-        if (shipsController.checkHitFirstPlayer(x, y))
+        if (shipsController.checkHitFirstPlayer(x, y)) {
+            if (shipsController.isShipAliveFirstPlayer(x, y) == NOT_ALIVE) {
+                for (int dx = -3; dx < 4; dx++)
+                    for (int dy = -3; dy < 4; dy++)
+                        if (shipsController.isBelongingShipFirstPlayer(x, y, x+dx, y+dy))
+                            shotsController.killShipFirstPlayer(x+dx, y+dy);
+            }
             if (!shipsController.checkSurvivorsFirstPlayer()) {
                 JOptionPane.showMessageDialog(headFrame, "COMP WON");
                 gameOver = true;
             } else shootsComp();
+        }
     }
 
     class BattleField extends JPanel {

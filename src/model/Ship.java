@@ -2,14 +2,15 @@ package model;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by anonymous on 13.09.2017.
  */
-public class Ship {
-    private ArrayList<Cell> cells = new ArrayList<>();
+class Ship {
+    private List<Cell> cells = new ArrayList<>();
     private int position;
-    public static final int VERTICALLY = 1;
+    private static final int VERTICALLY = 1;
 
     Ship(int x, int y, int length, int position) {
         this.position = position;
@@ -60,10 +61,10 @@ public class Ship {
             cell.paint(g, cellSize, hide);
     }
 
-    public int getPosition() {
+    int getPosition() {
         return position;
     }
-    public boolean isBelonging(int x , int y){
+    boolean isBelonging(int x, int y){
         for (Cell cell : cells)
             if (cell.getX() == x && cell.getY() == y)
                 return true;

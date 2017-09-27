@@ -14,10 +14,8 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Ships firstPlayerShips = null, secondPlayerShips = null;
-                ShipsController shipsController = new ShipsController (firstPlayerShips, secondPlayerShips);
-                Shots firstPlayerShots = null, secondPlayerShots = null;
-                ShotsController shotsController = new ShotsController (firstPlayerShots, secondPlayerShots);
+                ShipsController shipsController = new ShipsController (null, null);
+                ShotsController shotsController = new ShotsController (null, null);
                 GameFrame gameFrame = new GameFrame(shipsController, shotsController);
                 gameFrame.initGameFrame();
             }
