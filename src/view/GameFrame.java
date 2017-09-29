@@ -13,7 +13,7 @@ import java.util.Random;
  * Created by anonymous on 15.09.2017.
  */
 public class GameFrame {
-    private static final int FIELD_SIZE = 10;
+    static final int FIELD_SIZE = 10;
     private final int COMP_PANEL_SIZE = 400;
     private final int COMP_CELL_SIZE = COMP_PANEL_SIZE / FIELD_SIZE;
     private final int PLAYER_PANEL_SIZE = COMP_PANEL_SIZE / 2;
@@ -72,6 +72,7 @@ public class GameFrame {
         playerBattleField.setBorder(BorderFactory.createLineBorder(Color.blue));
 
         JButton newGameButton = new JButton("New Game");
+        newGameButton.setFont(new Font("", Font.BOLD, 20));
         newGameButton.addActionListener(e -> {
             newGame();
             compBattleField.repaint();
@@ -88,11 +89,14 @@ public class GameFrame {
         headFrame.add(rightPanel);
         headFrame.pack();
         headFrame.setLocationRelativeTo(null);
-        headFrame.setVisible(true);
         newGame();
+        headFrame.setVisible(true);
+
     }
 
     private void newGame() {
+        BeginningGame beginningGame = new BeginningGame(shipsController, shotsController);
+        beginningGame.init();
         shotsController.newGame();
         shipsController.newGame(FIELD_SIZE);
         gameOver = false;

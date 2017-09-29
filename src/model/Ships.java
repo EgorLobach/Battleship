@@ -24,6 +24,9 @@ public class Ships {
             ships.add(ship);
         }
     }
+    public Ships(){
+        ships= new ArrayList<>();
+    }
 
     private boolean isOverlayOrTouch(Ship ctrlShip) {
         for (Ship ship : ships)
