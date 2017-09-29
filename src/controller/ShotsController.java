@@ -21,21 +21,18 @@ public class ShotsController {
         this.secondPlayerShots = new Shots();
     }
 
-    public void firstPlayerShotsPaint(Graphics g, int cellSize)
-    {
-        for (Shot shot : firstPlayerShots.getShots())
-        {
+    public void firstPlayerShotsPaint(Graphics g, int cellSize) {
+        for (Shot shot : firstPlayerShots.getShots()) {
             g.setColor(Color.gray);
-            g.fillRect(shot.getX()*cellSize + cellSize/2 - 3, shot.getY()*cellSize + cellSize/2 - 3, 8, 8);
+            g.fillRect(shot.getX() * cellSize + cellSize / 2 - 3, shot.getY() * cellSize + cellSize / 2 - 3, 8, 8);
         }
     }
 
     public void secondPlayerShotsPaint(Graphics g, int cellSize) {
 
-        for (Shot shot : secondPlayerShots.getShots())
-        {
+        for (Shot shot : secondPlayerShots.getShots()) {
             g.setColor(Color.gray);
-            g.fillRect(shot.getX()*cellSize + cellSize/2 - 3, shot.getY()*cellSize + cellSize/2 - 3, 8, 8);
+            g.fillRect(shot.getX() * cellSize + cellSize / 2 - 3, shot.getY() * cellSize + cellSize / 2 - 3, 8, 8);
         }
     }
 

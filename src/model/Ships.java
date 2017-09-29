@@ -55,7 +55,7 @@ public class Ships {
 
     public boolean isBelongingShip(int x1, int y1, int x2, int y2) {
         for (Ship ship : ships)
-            if (ship.isBelonging(x1, y1)&&ship.isBelonging(x2, y2))
+            if (ship.isBelonging(x1, y1) && ship.isBelonging(x2, y2))
                 return true;
         return false;
     }

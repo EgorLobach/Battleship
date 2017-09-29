@@ -53,8 +53,8 @@ public class GameFrame {
                             if (!shipsController.isShipAliveSecondPlayer(x, y)) {
                                 for (int dx = -3; dx < 4; dx++)
                                     for (int dy = -3; dy < 4; dy++)
-                                        if (shipsController.isBelongingShipSecondPlayer(x, y, x+dx, y+dy))
-                                            shotsController.killShipSecondPlayer(x+dx, y+dy);
+                                        if (shipsController.isBelongingShipSecondPlayer(x, y, x + dx, y + dy))
+                                            shotsController.killShipSecondPlayer(x + dx, y + dy);
                             }
                             if (!shipsController.checkSurvivorsSecondPlayer()) {
                                 JOptionPane.showMessageDialog(headFrame, "YOU WON");
@@ -111,8 +111,8 @@ public class GameFrame {
             if (!shipsController.isShipAliveFirstPlayer(x, y)) {
                 for (int dx = -3; dx < 4; dx++)
                     for (int dy = -3; dy < 4; dy++)
-                        if (shipsController.isBelongingShipFirstPlayer(x, y, x+dx, y+dy))
-                            shotsController.killShipFirstPlayer(x+dx, y+dy);
+                        if (shipsController.isBelongingShipFirstPlayer(x, y, x + dx, y + dy))
+                            shotsController.killShipFirstPlayer(x + dx, y + dy);
             }
             if (!shipsController.checkSurvivorsFirstPlayer()) {
                 JOptionPane.showMessageDialog(headFrame, "COMP WON");

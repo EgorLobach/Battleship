@@ -1,7 +1,5 @@
 import controller.ShipsController;
 import controller.ShotsController;
-import model.Ships;
-import model.Shots;
 import view.GameFrame;
 
 import javax.swing.*;
@@ -14,8 +12,8 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ShipsController shipsController = new ShipsController (null, null);
-                ShotsController shotsController = new ShotsController (null, null);
+                ShipsController shipsController = new ShipsController(null, null);
+                ShotsController shotsController = new ShotsController(null, null);
                 GameFrame gameFrame = new GameFrame(shipsController, shotsController);
                 gameFrame.initGameFrame();
             }

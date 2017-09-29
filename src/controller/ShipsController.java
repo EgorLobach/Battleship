@@ -23,10 +23,10 @@ public class ShipsController {
     }
 
     public void firstPlayerShipsPaint(Graphics g, int cellSize) {
-        for (Ship ship : firstPlayerShips.getShips()){
-            for (Cell cell : ship.getCells()){
+        for (Ship ship : firstPlayerShips.getShips()) {
+            for (Cell cell : ship.getCells()) {
                 if (cell.isAlive())
-                    g.setColor(Color.gray);
+                    g.setColor(Color.BLUE);
                 else g.setColor(Color.RED);
                 g.fill3DRect(cell.getX() * cellSize + 1, cell.getY() * cellSize + 1,
                         cellSize - 2, cellSize - 2, true);
@@ -35,8 +35,8 @@ public class ShipsController {
     }
 
     public void secondPlayerShipsPaint(Graphics g, int cellSize) {
-        for (Ship ship : secondPlayerShips.getShips()){
-            for (Cell cell : ship.getCells()){
+        for (Ship ship : secondPlayerShips.getShips()) {
+            for (Cell cell : ship.getCells()) {
                 if (!cell.isAlive()) {
                     g.setColor(Color.RED);
                     g.fill3DRect(cell.getX() * cellSize + 1, cell.getY() * cellSize + 1,

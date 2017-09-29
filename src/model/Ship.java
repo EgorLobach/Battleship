@@ -53,7 +53,7 @@ public class Ship {
         return false;
     }
 
-    boolean isBelonging(int x, int y){
+    boolean isBelonging(int x, int y) {
         for (Cell cell : cells)
             if (cell.getX() == x && cell.getY() == y)
                 return true;
