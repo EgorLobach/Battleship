@@ -19,7 +19,6 @@ public class GameFrame {
     private final int PLAYER_PANEL_SIZE = COMP_PANEL_SIZE / 2;
     private final int PLAYER_CELL_SIZE = PLAYER_PANEL_SIZE / FIELD_SIZE;
 
-
     private ShipsController shipsController;
     private ShotsController shotsController;
     private BattleField playerBattleField, compBattleField;
