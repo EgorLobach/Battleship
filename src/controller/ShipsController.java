@@ -66,12 +66,12 @@ public class ShipsController {
         return firstPlayerShips.isShipAlive(x, y);
     }
 
-    public boolean isBelongingShipFirstPlayer(int x1, int y1, int x2, int y2) {
-        return firstPlayerShips.isBelongingShip(x1, y1, x2, y2);
-    }
-
     public boolean isShipAliveSecondPlayer(int x, int y) {
         return secondPlayerShips.isShipAlive(x, y);
+    }
+
+    public boolean isBelongingShipFirstPlayer(int x1, int y1, int x2, int y2) {
+        return firstPlayerShips.isBelongingShip(x1, y1, x2, y2);
     }
 
     public boolean isBelongingShipSecondPlayer(int x1, int y1, int x2, int y2) {
