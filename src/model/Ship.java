@@ -7,8 +7,9 @@ import java.util.List;
  * Created by anonymous on 13.09.2017.
  */
 public class Ship {
-    private List<Cell> cells = new ArrayList<>();
     private static final int VERTICALLY = 1;
+
+    private List<Cell> cells = new ArrayList<>();
 
     Ship(int x, int y, int length, int position) {
         for (int i = 0; i < length; i++) {
