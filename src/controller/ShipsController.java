@@ -1,5 +1,7 @@
 package controller;
 
+import model.Cell;
+import model.Ship;
 import model.Ships;
 
 import java.awt.*;
@@ -15,17 +17,33 @@ public class ShipsController {
         this.secondPlayerShips = secondPlayerShips;
     }
 
-    public void newGame(int fieldSize, int cellSizeFirstPlayer, int cellSizeSecondPlayer) {
-        this.firstPlayerShips = new Ships(fieldSize, cellSizeFirstPlayer, false);
-        this.secondPlayerShips = new Ships(fieldSize, cellSizeSecondPlayer, true);
+    public void newGame(int fieldSize) {
+        this.firstPlayerShips = new Ships(fieldSize);
+        this.secondPlayerShips = new Ships(fieldSize);
     }
 
-    public void firstPlayerShipsPaint(Graphics g) {
-        firstPlayerShips.paint(g);
+    public void firstPlayerShipsPaint(Graphics g, int cellSize) {
+        for (Ship ship : firstPlayerShips.getShips()){
+            for (Cell cell : ship.getCells()){
+                if (cell.isAlive())
+                    g.setColor(Color.gray);
+                else g.setColor(Color.RED);
+                g.fill3DRect(cell.getX() * cellSize + 1, cell.getY() * cellSize + 1,
+                        cellSize - 2, cellSize - 2, true);
+            }
+        }
     }
 
-    public void secondPlayerShipsPaint(Graphics g) {
-        secondPlayerShips.paint(g);
+    public void secondPlayerShipsPaint(Graphics g, int cellSize) {
+        for (Ship ship : secondPlayerShips.getShips()){
+            for (Cell cell : ship.getCells()){
+                if (!cell.isAlive()) {
+                    g.setColor(Color.RED);
+                    g.fill3DRect(cell.getX() * cellSize + 1, cell.getY() * cellSize + 1,
+                            cellSize - 2, cellSize - 2, true);
+                }
+            }
+        }
     }
 
     public boolean checkHitFirstPlayer(int x, int y) {
@@ -44,7 +62,7 @@ public class ShipsController {
         return secondPlayerShips.checkSurvivors();
     }
 
-    public int isShipAliveFirstPlayer(int x, int y) {
+    public boolean isShipAliveFirstPlayer(int x, int y) {
         return firstPlayerShips.isShipAlive(x, y);
     }
 
@@ -52,7 +70,7 @@ public class ShipsController {
         return firstPlayerShips.isBelongingShip(x1, y1, x2, y2);
     }
 
-    public int isShipAliveSecondPlayer(int x, int y) {
+    public boolean isShipAliveSecondPlayer(int x, int y) {
         return secondPlayerShips.isShipAlive(x, y);
     }
 

@@ -5,41 +5,33 @@ import java.awt.*;
 /**
  * Created by anonymous on 13.09.2017.
  */
-class Cell {
-    private final Color RED = Color.red;
+public class Cell {
     private int x, y;
-    private Color color;
+    private boolean alive;
 
     Cell(int x, int y) {
         this.x = x;
         this.y = y;
-        this.color = Color.gray;
+        this.alive = true;
     }
 
-    int getX() {
+    public int getX() {
         return x;
     }
 
-    int getY() {
+    public int getY() {
         return y;
     }
 
     boolean checkHit(int x, int y) {
         if (this.x == x && this.y == y) {
-            color = RED;
+            alive = false;
             return true;
         }
         return false;
     }
 
-    boolean isAlive() {
-        return color != RED;
-    }
-
-    void paint(Graphics g, int cellSize, boolean hide) {
-        if (!hide || this.color == RED) {
-            g.setColor(color);
-            g.fill3DRect(x * cellSize + 1, y * cellSize + 1, cellSize - 2, cellSize - 2, true);
-        }
+    public boolean isAlive() {
+        return alive;
     }
 }

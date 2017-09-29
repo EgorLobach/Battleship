@@ -1,21 +1,18 @@
 package model;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by anonymous on 13.09.2017.
  */
-class Ship {
+public class Ship {
     private List<Cell> cells = new ArrayList<>();
-    private int position;
     private static final int VERTICALLY = 1;
 
     Ship(int x, int y, int length, int position) {
-        this.position = position;
         for (int i = 0; i < length; i++) {
-            cells.add(new Cell(x + i * ((this.position == VERTICALLY) ? 0 : 1), y + i * ((this.position == VERTICALLY) ? 1 : 0)));
+            cells.add(new Cell(x + i * ((position == VERTICALLY) ? 0 : 1), y + i * ((position == VERTICALLY) ? 1 : 0)));
         }
     }
 
@@ -56,18 +53,14 @@ class Ship {
         return false;
     }
 
-    void paint(Graphics g, int cellSize, boolean hide) {
-        for (Cell cell : cells)
-            cell.paint(g, cellSize, hide);
-    }
-
-    int getPosition() {
-        return position;
-    }
     boolean isBelonging(int x, int y){
         for (Cell cell : cells)
             if (cell.getX() == x && cell.getY() == y)
                 return true;
         return false;
+    }
+
+    public List<Cell> getCells() {
+        return cells;
     }
 }

@@ -9,8 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-import static model.Ships.NOT_ALIVE;
-
 /**
  * Created by anonymous on 15.09.2017.
  */
@@ -52,7 +50,7 @@ public class GameFrame {
                     if (!shotsController.firstPlayerHitSamePlace(x, y)) {
                         shotsController.addFirstPlayerShots(x, y);
                         if (shipsController.checkHitSecondPlayer(x, y)) {
-                            if (shipsController.isShipAliveSecondPlayer(x, y) == NOT_ALIVE) {
+                            if (!shipsController.isShipAliveSecondPlayer(x, y)) {
                                 for (int dx = -3; dx < 4; dx++)
                                     for (int dy = -3; dy < 4; dy++)
                                         if (shipsController.isBelongingShipSecondPlayer(x, y, x+dx, y+dy))
@@ -96,8 +94,8 @@ public class GameFrame {
     }
 
     private void newGame() {
-        shotsController.newGame(PLAYER_CELL_SIZE, COMP_CELL_SIZE);
-        shipsController.newGame(FIELD_SIZE, PLAYER_CELL_SIZE, COMP_CELL_SIZE);
+        shotsController.newGame();
+        shipsController.newGame(FIELD_SIZE);
         gameOver = false;
         randomGenerator = new Random();
     }
@@ -110,7 +108,7 @@ public class GameFrame {
         } while (shotsController.secondPlayerHitSamePlace(x, y));
         shotsController.addSecondPlayerShots(x, y);
         if (shipsController.checkHitFirstPlayer(x, y)) {
-            if (shipsController.isShipAliveFirstPlayer(x, y) == NOT_ALIVE) {
+            if (!shipsController.isShipAliveFirstPlayer(x, y)) {
                 for (int dx = -3; dx < 4; dx++)
                     for (int dy = -3; dy < 4; dy++)
                         if (shipsController.isBelongingShipFirstPlayer(x, y, x+dx, y+dy))
@@ -134,11 +132,11 @@ public class GameFrame {
                 g.drawLine(i * cellSize, 0, i * cellSize, FIELD_SIZE * cellSize);
             }
             if (cellSize == COMP_CELL_SIZE) {
-                shotsController.firstPlayerShotsPaint(g);
-                shipsController.secondPlayerShipsPaint(g);
+                shotsController.firstPlayerShotsPaint(g, COMP_CELL_SIZE);
+                shipsController.secondPlayerShipsPaint(g, COMP_CELL_SIZE);
             } else {
-                shotsController.secondPlayerShotsPaint(g);
-                shipsController.firstPlayerShipsPaint(g);
+                shotsController.secondPlayerShotsPaint(g, PLAYER_CELL_SIZE);
+                shipsController.firstPlayerShipsPaint(g, PLAYER_CELL_SIZE);
             }
         }
     }

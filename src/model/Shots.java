@@ -2,16 +2,15 @@ package model;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by anonymous on 15.09.2017.
  */
 public class Shots {
-    private final int CELL_SIZE;
-    private ArrayList<Shot> shots;
+    private List<Shot> shots;
 
-    public Shots(int cellSize){
-        CELL_SIZE = cellSize;
+    public Shots(){
         shots = new ArrayList<>();
     }
     public void add(int x, int y){
@@ -23,9 +22,10 @@ public class Shots {
                 return true;
         return false;
     }
-    public void paint (Graphics g){
-        for (Shot shot : shots)
-            shot.paint(g, CELL_SIZE);
+
+
+    public List<Shot> getShots() {
+        return shots;
     }
 
     public void kill(int x, int y) {

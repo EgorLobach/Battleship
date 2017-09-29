@@ -1,5 +1,6 @@
 package controller;
 
+import model.Shot;
 import model.Shots;
 
 import java.awt.*;
@@ -15,24 +16,36 @@ public class ShotsController {
         this.secondPlayerShots = secondPlayerShots;
     }
 
-    public void newGame(int cellSizeFirstPlayer, int cellSizeSecondPlayer) {
-        this.firstPlayerShots = new Shots(cellSizeSecondPlayer);
-        this.secondPlayerShots = new Shots(cellSizeFirstPlayer);
+    public void newGame() {
+        this.firstPlayerShots = new Shots();
+        this.secondPlayerShots = new Shots();
     }
 
-    public void firstPlayerShotsPaint(Graphics g) {
-        firstPlayerShots.paint(g);
+    public void firstPlayerShotsPaint(Graphics g, int cellSize)
+    {
+        for (Shot shot : firstPlayerShots.getShots())
+        {
+            g.setColor(Color.gray);
+            g.fillRect(shot.getX()*cellSize + cellSize/2 - 3, shot.getY()*cellSize + cellSize/2 - 3, 8, 8);
+        }
     }
 
-    public void secondPlayerShotsPaint(Graphics g) {
-        secondPlayerShots.paint(g);
+    public void secondPlayerShotsPaint(Graphics g, int cellSize) {
+
+        for (Shot shot : secondPlayerShots.getShots())
+        {
+            g.setColor(Color.gray);
+            g.fillRect(shot.getX()*cellSize + cellSize/2 - 3, shot.getY()*cellSize + cellSize/2 - 3, 8, 8);
+        }
     }
 
     public boolean firstPlayerHitSamePlace(int x, int y) {
         return firstPlayerShots.hitSamePlace(x, y);
     }
 
-    public boolean secondPlayerHitSamePlace(int x, int y) { return secondPlayerShots.hitSamePlace(x, y);}
+    public boolean secondPlayerHitSamePlace(int x, int y) {
+        return secondPlayerShots.hitSamePlace(x, y);
+    }
 
     public void addFirstPlayerShots(int x, int y) {
         firstPlayerShots.add(x, y);
@@ -46,6 +59,8 @@ public class ShotsController {
         firstPlayerShots.kill(x, y);
     }
 
-    public void killShipFirstPlayer(int x, int y) { secondPlayerShots.kill(x, y);}
+    public void killShipFirstPlayer(int x, int y) {
+        secondPlayerShots.kill(x, y);
+    }
 
 }
