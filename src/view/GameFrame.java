@@ -14,10 +14,10 @@ import java.util.Random;
  */
 public class GameFrame {
     static final int FIELD_SIZE = 10;
-    private final int COMP_PANEL_SIZE = 400;
-    private final int COMP_CELL_SIZE = COMP_PANEL_SIZE / FIELD_SIZE;
-    private final int PLAYER_PANEL_SIZE = COMP_PANEL_SIZE / 2;
-    private final int PLAYER_CELL_SIZE = PLAYER_PANEL_SIZE / FIELD_SIZE;
+    static final int COMP_PANEL_SIZE = 400;
+    static final int COMP_CELL_SIZE = COMP_PANEL_SIZE / FIELD_SIZE;
+    static final int PLAYER_PANEL_SIZE = COMP_PANEL_SIZE / 2;
+    static final int PLAYER_CELL_SIZE = PLAYER_PANEL_SIZE / FIELD_SIZE;
 
     private ShipsController shipsController;
     private ShotsController shotsController;
@@ -29,13 +29,13 @@ public class GameFrame {
     public GameFrame(ShipsController shipsController, ShotsController shotsController) {
         this.shipsController = shipsController;
         this.shotsController = shotsController;
-        headFrame.setTitle("Battle Ship");
+        headFrame.setTitle("Морской бой");
         headFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         headFrame.setResizable(false);
     }
 
     public void initGameFrame() {
-        compBattleField = new BattleField();
+        compBattleField = new BattleField(shipsController, shotsController);
         compBattleField.setPreferredSize(new Dimension(COMP_PANEL_SIZE, COMP_PANEL_SIZE));
         compBattleField.setBackground(Color.WHITE);
         compBattleField.setBorder(BorderFactory.createLineBorder(Color.blue));
@@ -56,7 +56,7 @@ public class GameFrame {
                                             shotsController.killShipSecondPlayer(x + dx, y + dy);
                             }
                             if (!shipsController.checkSurvivorsSecondPlayer()) {
-                                JOptionPane.showMessageDialog(headFrame, "YOU WON");
+                                JOptionPane.showMessageDialog(headFrame, "Вы выйграли!!!");
                                 gameOver = true;
                             }
                         } else shootsComp();
@@ -66,12 +66,12 @@ public class GameFrame {
                 }
             }
         });
-        playerBattleField = new BattleField();
+        playerBattleField = new BattleField(shipsController, shotsController);
         playerBattleField.setPreferredSize(new Dimension(PLAYER_PANEL_SIZE, PLAYER_PANEL_SIZE));
         playerBattleField.setBackground(Color.WHITE);
         playerBattleField.setBorder(BorderFactory.createLineBorder(Color.blue));
 
-        JButton newGameButton = new JButton("New Game");
+        JButton newGameButton = new JButton("Новая игра");
         newGameButton.setFont(new Font("", Font.BOLD, 20));
         newGameButton.addActionListener(e -> {
             newGame();
@@ -118,29 +118,9 @@ public class GameFrame {
                             shotsController.killShipFirstPlayer(x + dx, y + dy);
             }
             if (!shipsController.checkSurvivorsFirstPlayer()) {
-                JOptionPane.showMessageDialog(headFrame, "COMP WON");
+                JOptionPane.showMessageDialog(headFrame, "Компьютер выйграл!!!");
                 gameOver = true;
             } else shootsComp();
-        }
-    }
-
-    class BattleField extends JPanel {
-        @Override
-        public void paint(Graphics g) {
-            super.paint(g);
-            int cellSize = (int) getSize().getWidth() / FIELD_SIZE;
-            g.setColor(Color.LIGHT_GRAY);
-            for (int i = 1; i < FIELD_SIZE; i++) {
-                g.drawLine(0, i * cellSize, FIELD_SIZE * cellSize, i * cellSize);
-                g.drawLine(i * cellSize, 0, i * cellSize, FIELD_SIZE * cellSize);
-            }
-            if (cellSize == COMP_CELL_SIZE) {
-                shotsController.firstPlayerShotsPaint(g, COMP_CELL_SIZE);
-                shipsController.secondPlayerShipsPaint(g, COMP_CELL_SIZE);
-            } else {
-                shotsController.secondPlayerShotsPaint(g, PLAYER_CELL_SIZE);
-                shipsController.firstPlayerShipsPaint(g, PLAYER_CELL_SIZE);
-            }
         }
     }
 }
