@@ -97,8 +97,6 @@ public class GameFrame {
     private void newGame() {
         BeginningGame beginningGame = new BeginningGame(shipsController, shotsController);
         beginningGame.init();
-        shotsController.newGame();
-        shipsController.newGame(FIELD_SIZE);
         gameOver = false;
         randomGenerator = new Random();
     }

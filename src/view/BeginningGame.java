@@ -2,6 +2,7 @@ package view;
 
 import controller.ShipsController;
 import controller.ShotsController;
+import listener.ExitWindowListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +45,7 @@ class BeginningGame {
             beginningGame.dispose();
             collocation.init();
         });
-
+        beginningGame.addWindowListener(new ExitWindowListener());
         beginningGame.setLayout(new BorderLayout());
         beginningGame.add(welcome, BorderLayout.NORTH);
         beginningGame.add(autoCollocation, BorderLayout.CENTER);
