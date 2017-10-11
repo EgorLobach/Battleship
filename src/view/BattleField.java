@@ -12,10 +12,12 @@ import java.awt.*;
 class BattleField extends JPanel {
     private final ShipsController shipsController;
     private final ShotsController shotsController;
+    private final boolean autoCollocation;
 
-    BattleField(ShipsController shipsController, ShotsController shotsController) {
-        this.shipsController=shipsController;
-        this.shotsController=shotsController;
+    BattleField(ShipsController shipsController, ShotsController shotsController, boolean autoCollocation) {
+        this.shipsController = shipsController;
+        this.shotsController = shotsController;
+        this.autoCollocation = autoCollocation;
     }
 
     @Override
@@ -26,6 +28,9 @@ class BattleField extends JPanel {
         for (int i = 1; i < GameFrame.FIELD_SIZE; i++) {
             g.drawLine(0, i * cellSize, GameFrame.FIELD_SIZE * cellSize, i * cellSize);
             g.drawLine(i * cellSize, 0, i * cellSize, GameFrame.FIELD_SIZE * cellSize);
+        }
+        if (!autoCollocation) {
+            shipsController.firstPlayerShipsPaint(g, GameFrame.COMP_CELL_SIZE);
         }
         if (cellSize == GameFrame.COMP_CELL_SIZE) {
             shotsController.firstPlayerShotsPaint(g, GameFrame.COMP_CELL_SIZE);

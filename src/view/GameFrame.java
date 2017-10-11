@@ -35,7 +35,7 @@ public class GameFrame {
     }
 
     public void initGameFrame() {
-        compBattleField = new BattleField(shipsController, shotsController);
+        compBattleField = new BattleField(shipsController, shotsController, true);
         compBattleField.setPreferredSize(new Dimension(COMP_PANEL_SIZE, COMP_PANEL_SIZE));
         compBattleField.setBackground(Color.WHITE);
         compBattleField.setBorder(BorderFactory.createLineBorder(Color.blue));
@@ -66,7 +66,7 @@ public class GameFrame {
                 }
             }
         });
-        playerBattleField = new BattleField(shipsController, shotsController);
+        playerBattleField = new BattleField(shipsController, shotsController, true);
         playerBattleField.setPreferredSize(new Dimension(PLAYER_PANEL_SIZE, PLAYER_PANEL_SIZE));
         playerBattleField.setBackground(Color.WHITE);
         playerBattleField.setBorder(BorderFactory.createLineBorder(Color.blue));
@@ -79,10 +79,21 @@ public class GameFrame {
             playerBattleField.repaint();
         });
 
+        JButton instructionButton = new JButton("Правила игры");
+        instructionButton.setFont(new Font("", Font.BOLD, 20));
+        instructionButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(headFrame, "«Морской бой» — игра для двух участников,\n" +
+                    "в которой игроки по очереди называют координаты на неизвестной им карте соперника.\n" +
+                    "Если у соперника по этим координатам имеется корабль (координаты заняты),\n" +
+                    "то корабль или его часть «топится», а попавший получает право сделать ещё один ход.\n" +
+                    "Цель игрока — первым поразить все корабли противника.");
+        });
+
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BorderLayout());
         rightPanel.add(playerBattleField, BorderLayout.NORTH);
-        rightPanel.add(newGameButton, BorderLayout.CENTER);
+        rightPanel.add(instructionButton, BorderLayout.CENTER);
+        rightPanel.add(newGameButton, BorderLayout.SOUTH);
 
         headFrame.setLayout(new BoxLayout(headFrame.getContentPane(), BoxLayout.X_AXIS));
         headFrame.add(compBattleField);
@@ -91,7 +102,6 @@ public class GameFrame {
         headFrame.setLocationRelativeTo(null);
         newGame();
         headFrame.setVisible(true);
-
     }
 
     private void newGame() {

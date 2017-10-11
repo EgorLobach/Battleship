@@ -17,16 +17,23 @@ public class ShipsController {
         this.secondPlayerShips = secondPlayerShips;
     }
 
-    public void newGame(int fieldSize) {
-        this.firstPlayerShips = new Ships(fieldSize);
-        this.secondPlayerShips = new Ships(fieldSize);
+    public void newGame(int fieldSize, boolean autoCollocation) {
+        if (autoCollocation) {
+            this.firstPlayerShips = new Ships(fieldSize, true);
+            this.secondPlayerShips = new Ships(fieldSize);
+        }
+        else {
+            this.firstPlayerShips = new Ships(fieldSize, false);
+            this.secondPlayerShips = new Ships(fieldSize);
+        }
     }
 
     public void firstPlayerShipsPaint(Graphics g, int cellSize) {
         for (Ship ship : firstPlayerShips.getShips()) {
             for (Cell cell : ship.getCells()) {
-                if (cell.isAlive())
+                if (cell.isAlive()){
                     g.setColor(Color.BLUE);
+                }
                 else g.setColor(Color.RED);
                 g.fill3DRect(cell.getX() * cellSize + 1, cell.getY() * cellSize + 1,
                         cellSize - 2, cellSize - 2, true);
@@ -76,5 +83,9 @@ public class ShipsController {
 
     public boolean isBelongingShipSecondPlayer(int x1, int y1, int x2, int y2) {
         return secondPlayerShips.isBelongingShip(x1, y1, x2, y2);
+    }
+
+    public void addShip(int x, int y, int length, int position) {
+        firstPlayerShips.addShip(x, y, length, position);
     }
 }

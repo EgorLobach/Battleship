@@ -24,8 +24,22 @@ public class Ships {
             ships.add(ship);
         }
     }
-    public Ships(){
-        ships= new ArrayList<>();
+
+    public Ships(int fieldSize, boolean autoCollocation) {
+        if (autoCollocation) {
+            Random random = new Random();
+            Pattern pattern = new Pattern();
+            for (int aPattern : pattern.getPattern()) {
+                Ship ship;
+                do {
+                    int x = random.nextInt(fieldSize);
+                    int y = random.nextInt(fieldSize);
+                    int position = random.nextInt(2);
+                    ship = new Ship(x, y, aPattern, position);
+                } while (ship.isOutOfField(fieldSize - 1) || isOverlayOrTouch(ship));
+                ships.add(ship);
+            }
+        } else ships = new ArrayList<>();
     }
 
     private boolean isOverlayOrTouch(Ship ctrlShip) {
@@ -65,5 +79,9 @@ public class Ships {
 
     public List<Ship> getShips() {
         return ships;
+    }
+
+    public void addShip(int x, int y, int length, int position) {
+        ships.add(new Ship(x, y, length, position));
     }
 }
