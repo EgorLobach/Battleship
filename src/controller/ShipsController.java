@@ -88,4 +88,8 @@ public class ShipsController {
     public void addShip(int x, int y, int length, int position) {
         firstPlayerShips.addShip(x, y, length, position);
     }
+
+    public boolean isShipHere(int x, int y, int length, int position) {
+        return firstPlayerShips.isShipHere(x, y, length, position);
+    }
 }

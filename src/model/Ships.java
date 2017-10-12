@@ -1,5 +1,6 @@
 package model;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -83,5 +84,12 @@ public class Ships {
 
     public void addShip(int x, int y, int length, int position) {
         ships.add(new Ship(x, y, length, position));
+    }
+
+    public boolean isShipHere(int x, int y, int length, int position) {
+        for (Ship ship : ships)
+            if(ship.isShipHere(x, y, length, position))
+                return true;
+        return false;
     }
 }

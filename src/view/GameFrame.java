@@ -18,6 +18,8 @@ public class GameFrame {
     static final int COMP_CELL_SIZE = COMP_PANEL_SIZE / FIELD_SIZE;
     static final int PLAYER_PANEL_SIZE = COMP_PANEL_SIZE / 2;
     static final int PLAYER_CELL_SIZE = PLAYER_PANEL_SIZE / FIELD_SIZE;
+    public static final int VERTICALLY = 1;
+    static final int HORIZONTALLY = 0;
 
     private ShipsController shipsController;
     private ShotsController shotsController;
@@ -38,7 +40,6 @@ public class GameFrame {
         compBattleField = new BattleField(shipsController, shotsController, true);
         compBattleField.setPreferredSize(new Dimension(COMP_PANEL_SIZE, COMP_PANEL_SIZE));
         compBattleField.setBackground(Color.WHITE);
-        compBattleField.setBorder(BorderFactory.createLineBorder(Color.blue));
         compBattleField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -69,7 +70,6 @@ public class GameFrame {
         playerBattleField = new BattleField(shipsController, shotsController, true);
         playerBattleField.setPreferredSize(new Dimension(PLAYER_PANEL_SIZE, PLAYER_PANEL_SIZE));
         playerBattleField.setBackground(Color.WHITE);
-        playerBattleField.setBorder(BorderFactory.createLineBorder(Color.blue));
 
         JButton newGameButton = new JButton("Новая игра");
         newGameButton.setFont(new Font("", Font.BOLD, 20));

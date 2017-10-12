@@ -18,6 +18,7 @@ class BattleField extends JPanel {
         this.shipsController = shipsController;
         this.shotsController = shotsController;
         this.autoCollocation = autoCollocation;
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
 
     @Override
