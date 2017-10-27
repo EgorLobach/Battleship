@@ -34,7 +34,6 @@ class Collocation {
     }
 
     void init() {
-
         collocation.setLayout(new BorderLayout());
         JButton readyButton = new JButton("Готово");
         readyButton.addActionListener(e -> {
@@ -43,9 +42,7 @@ class Collocation {
             } else collocation.dispose();
         });
         collocation.add(readyButton, BorderLayout.SOUTH);
-
         Pattern pattern = new Pattern();
-
         BattleField collocationField = new BattleField(shipsController, shotsController, false);
         collocationField.setPreferredSize(new Dimension(GameFrame.COMP_PANEL_SIZE, GameFrame.COMP_PANEL_SIZE));
         collocationField.addMouseListener(new MouseAdapter() {
@@ -72,7 +69,6 @@ class Collocation {
                     position = ((position == VERTICALLY) ? HORIZONTALLY : VERTICALLY);
             }
         });
-
         collocation.add(collocationField, BorderLayout.NORTH);
         collocation.addWindowListener(new ExitWindowListener());
         collocation.pack();

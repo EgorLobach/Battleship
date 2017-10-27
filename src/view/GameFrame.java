@@ -81,13 +81,12 @@ public class GameFrame {
 
         JButton instructionButton = new JButton("Правила игры");
         instructionButton.setFont(new Font("", Font.BOLD, 20));
-        instructionButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(headFrame, "«Морской бой» — игра для двух участников,\n" +
-                    "в которой игроки по очереди называют координаты на неизвестной им карте соперника.\n" +
-                    "Если у соперника по этим координатам имеется корабль (координаты заняты),\n" +
-                    "то корабль или его часть «топится», а попавший получает право сделать ещё один ход.\n" +
-                    "Цель игрока — первым поразить все корабли противника.");
-        });
+        instructionButton.addActionListener(e ->
+                JOptionPane.showMessageDialog(headFrame, "«Морской бой» — игра для двух участников,\n" +
+                "в которой игроки по очереди называют координаты на неизвестной им карте соперника.\n" +
+                "Если у соперника по этим координатам имеется корабль (координаты заняты),\n" +
+                "то корабль или его часть «топится», а попавший получает право сделать ещё один ход.\n" +
+                "Цель игрока — первым поразить все корабли противника."));
 
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BorderLayout());
@@ -118,7 +117,7 @@ public class GameFrame {
             y = randomGenerator.nextInt(FIELD_SIZE);
         } while (shotsController.secondPlayerHitSamePlace(x, y));
         shotsController.addSecondPlayerShots(x, y);
-        if (shipsController.checkHitFirstPlayer(x, y)) {
+         if (shipsController.checkHitFirstPlayer(x, y)) {
             if (!shipsController.isShipAliveFirstPlayer(x, y)) {
                 for (int dx = -3; dx < 4; dx++)
                     for (int dy = -3; dy < 4; dy++)

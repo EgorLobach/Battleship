@@ -73,16 +73,14 @@ public class Ship {
                         for (int dy = -1; dy < 2; dy++)
                             if (x + dx == cell.getX() && dY + dy == cell.getY())
                                 return true;
-        }
-        else {
-            for (int dX = x; dX < x+length; dX++)
+        } else {
+            for (int dX = x; dX < x + length; dX++)
                 for (Cell cell : cells)
                     for (int dx = -1; dx < 2; dx++)
                         for (int dy = -1; dy < 2; dy++)
                             if (dX + dx == cell.getX() && y + dy == cell.getY())
                                 return true;
         }
-
         return false;
     }
 }
