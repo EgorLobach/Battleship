@@ -31,20 +31,12 @@ class Collocation {
         collocation.setResizable(false);
         collocation.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         collocation.setModal(true);
+        collocation.setLayout(new BorderLayout());
     }
 
     void init() {
-        collocation.setLayout(new BorderLayout());
-        JButton readyButton = new JButton("Готово");
-        readyButton.addActionListener(e -> {
-            if (!allCollocation) {
-                JOptionPane.showMessageDialog(collocation, "Не все корабли расставлены!");
-            } else collocation.dispose();
-        });
-        collocation.add(readyButton, BorderLayout.SOUTH);
         Pattern pattern = new Pattern();
         BattleField collocationField = new BattleField(shipsController, shotsController, false);
-        collocationField.setPreferredSize(new Dimension(GameFrame.COMP_PANEL_SIZE, GameFrame.COMP_PANEL_SIZE));
         collocationField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -52,13 +44,9 @@ class Collocation {
                 int x = e.getX() / COMP_CELL_SIZE;
                 int y = e.getY() / COMP_CELL_SIZE;
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    if(!allCollocation && !shipsController.isShipHere(x, y, pattern.get(number), position)) {
-                        if (position == VERTICALLY) {
-                            if (y + pattern.get(number) > FIELD_SIZE)
-                                return;
-                        }
-                        else if (x + pattern.get(number) > FIELD_SIZE)
-                            return;
+                    if((!allCollocation && !shipsController.isShipHere(x, y, pattern.get(number), position))&&
+                            !((position == VERTICALLY && y + pattern.get(number) > FIELD_SIZE) ||
+                                (position != VERTICALLY && x + pattern.get(number) > FIELD_SIZE))) {
                         shipsController.addShip(x, y, pattern.get(number), position);
                         collocationField.repaint();
                         number++;
@@ -69,6 +57,14 @@ class Collocation {
                     position = ((position == VERTICALLY) ? HORIZONTALLY : VERTICALLY);
             }
         });
+        collocationField.setPreferredSize(new Dimension(GameFrame.COMP_PANEL_SIZE, GameFrame.COMP_PANEL_SIZE));
+        JButton readyButton = new JButton("Готово");
+        readyButton.addActionListener(e -> {
+            if (!allCollocation) {
+                JOptionPane.showMessageDialog(collocation, "Не все корабли расставлены!");
+            } else collocation.dispose();
+        });
+        collocation.add(readyButton, BorderLayout.SOUTH);
         collocation.add(collocationField, BorderLayout.NORTH);
         collocation.addWindowListener(new ExitWindowListener());
         collocation.pack();

@@ -23,7 +23,6 @@ public class GameFrame {
 
     private ShipsController shipsController;
     private ShotsController shotsController;
-    private BattleField playerBattleField, compBattleField;
     private boolean gameOver;
     private Random randomGenerator;
     private JFrame headFrame = new JFrame();
@@ -37,7 +36,11 @@ public class GameFrame {
     }
 
     public void initGameFrame() {
-        compBattleField = new BattleField(shipsController, shotsController, true);
+        BattleField playerBattleField = new BattleField(shipsController, shotsController, true);
+        playerBattleField.setPreferredSize(new Dimension(PLAYER_PANEL_SIZE, PLAYER_PANEL_SIZE));
+        playerBattleField.setBackground(Color.WHITE);
+
+        BattleField compBattleField = new BattleField(shipsController, shotsController, true);
         compBattleField.setPreferredSize(new Dimension(COMP_PANEL_SIZE, COMP_PANEL_SIZE));
         compBattleField.setBackground(Color.WHITE);
         compBattleField.addMouseListener(new MouseAdapter() {
@@ -67,9 +70,6 @@ public class GameFrame {
                 }
             }
         });
-        playerBattleField = new BattleField(shipsController, shotsController, true);
-        playerBattleField.setPreferredSize(new Dimension(PLAYER_PANEL_SIZE, PLAYER_PANEL_SIZE));
-        playerBattleField.setBackground(Color.WHITE);
 
         JButton newGameButton = new JButton("Новая игра");
         newGameButton.setFont(new Font("", Font.BOLD, 20));

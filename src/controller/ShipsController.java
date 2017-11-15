@@ -20,11 +20,11 @@ public class ShipsController {
     public void newGame(int fieldSize, boolean autoCollocation) {
         if (autoCollocation) {
             this.firstPlayerShips = new Ships(fieldSize, true);
-            this.secondPlayerShips = new Ships(fieldSize);
+            this.secondPlayerShips = new Ships(fieldSize, true);
         }
         else {
             this.firstPlayerShips = new Ships(fieldSize, false);
-            this.secondPlayerShips = new Ships(fieldSize);
+            this.secondPlayerShips = new Ships(fieldSize, true);
         }
     }
 

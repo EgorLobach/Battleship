@@ -10,8 +10,10 @@ import java.util.List;
  */
 public class Ship {
     private List<Cell> cells = new ArrayList<>();
+    private int alive;
 
     Ship(int x, int y, int length, int position) {
+        this.alive=length;
         for (int i = 0; i < length; i++) {
             cells.add(new Cell(x + i * ((position == 1) ? 0 : 1), y + i * ((position == 1) ? 1 : 0)));
         }
@@ -42,16 +44,15 @@ public class Ship {
 
     boolean checkHit(int x, int y) {
         for (Cell cell : cells)
-            if (cell.checkHit(x, y))
+            if (cell.checkHit(x, y)){
+                alive--;
                 return true;
+            }
         return false;
     }
 
     boolean isAlive() {
-        for (Cell cell : cells)
-            if (cell.isAlive())
-                return true;
-        return false;
+        return (alive!=0);
     }
 
     boolean isBelonging(int x, int y) {

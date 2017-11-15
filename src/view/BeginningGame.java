@@ -14,11 +14,9 @@ class BeginningGame {
     private JDialog beginningGame;
     private ShipsController shipsController;
     private ShotsController shotsController;
-    private JLabel welcome;
+
 
     BeginningGame(ShipsController shipsController, ShotsController shotsController) {
-        welcome = new JLabel("*Выберите вариант расстановки:*");
-        welcome.setFont(new Font("", Font.ITALIC, 20));
         this.shipsController = shipsController;
         this.shotsController = shotsController;
         beginningGame = new JDialog();
@@ -29,6 +27,8 @@ class BeginningGame {
     }
 
     void init() {
+        JLabel welcome = new JLabel("*Выберите вариант расстановки:*");
+        welcome.setFont(new Font("", Font.ITALIC, 20));
         JButton autoCollocation = new JButton("Расставить автоматически");
         autoCollocation.setFont(new Font("", Font.PLAIN, 20));
         JButton himselfCollocation = new JButton("Расставить самостоятельно");

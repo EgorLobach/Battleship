@@ -11,21 +11,6 @@ import java.util.Random;
 public class Ships {
     private List<Ship> ships = new ArrayList<>();
 
-    public Ships(int fieldSize) {
-        Random random = new Random();
-        int[] pattern = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
-        for (int aPattern : pattern) {
-            Ship ship;
-            do {
-                int x = random.nextInt(fieldSize);
-                int y = random.nextInt(fieldSize);
-                int position = random.nextInt(2);
-                ship = new Ship(x, y, aPattern, position);
-            } while (ship.isOutOfField(fieldSize - 1) || isOverlayOrTouch(ship));
-            ships.add(ship);
-        }
-    }
-
     public Ships(int fieldSize, boolean autoCollocation) {
         if (autoCollocation) {
             Random random = new Random();
